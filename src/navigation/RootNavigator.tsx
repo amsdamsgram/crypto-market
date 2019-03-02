@@ -1,6 +1,3 @@
-// @flow
-import React from "react";
-import { View } from "react-native";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import Theme from "../Theme";

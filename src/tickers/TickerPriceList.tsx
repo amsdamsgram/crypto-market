@@ -1,11 +1,9 @@
 import { inject, observer } from "mobx-react/native";
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import ApiClient from "../api/ApiClient";
 import ComponentSize from "../common/ComponentSize";
 import Spinner from "../common/Spinner";
-import Logger from "../logging/Logger";
 import Ticker from "../models/Ticker";
 import Theme from "../Theme";
 import TickerAction from "./TickerAction";
@@ -41,7 +39,7 @@ export default class TickerPriceList extends Component<IProps> {
 
   onRefresh = () => {
     this.props.tickerStore.getTickers(TickerAction.REFRESH);
-  }
+  };
 
   renderItem(props: { item: Ticker }) {
     const size = ComponentSize.computeFromWindow(
