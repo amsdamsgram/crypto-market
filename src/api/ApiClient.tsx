@@ -1,17 +1,26 @@
 import axios, { AxiosInstance } from "axios";
 
+import Config from "../config/Config";
 import Logger from "../logging/Logger";
+import AssetPair from "../models/AssetPair";
+import Ticker from "../models/Ticker";
 import ApiClientUtils from "./ApiClientUtils";
+import InputMapper from "./InputMapper";
+import OutputMapper from "./OutputMapper";
 
 export default class ApiClient {
+  inputMapper: InputMapper;
   instance: AxiosInstance;
   logger: Logger;
+  outputMapper: OutputMapper;
 
   constructor(logger: Logger) {
+    this.inputMapper = new InputMapper();
+    this.outputMapper = new OutputMapper();
     this.logger = logger;
 
     this.instance = axios.create({
-      baseURL: "https://api.kraken.com"
+      baseURL: Config.apiBaseURL
     });
 
     this.instance.interceptors.request.use(
@@ -32,6 +41,24 @@ export default class ApiClient {
         ApiClientUtils.logError(this.logger, err);
         return Promise.reject(err);
       }
+    );
+  }
+
+  async getAssetPairs(): Promise<AssetPair[]> {
+    const response = await this.instance.get(Config.routes.getAssetPairs);
+
+    return Object.keys(response.data.result).map((key: string) =>
+      this.inputMapper.mapAssetPair(response.data.result[key])
+    );
+  }
+
+  async getTickers(assetPairs: AssetPair[]): Promise<Ticker[]> {
+    const response = await this.instance.get(Config.routes.getTicker, {
+      params: { pair: this.outputMapper.mapAssetPairs(assetPairs) }
+    });
+
+    return Object.keys(response.data.result).map((key: string) =>
+      this.inputMapper.mapTicker({ ...response.data.result[key], name: key })
     );
   }
 }
