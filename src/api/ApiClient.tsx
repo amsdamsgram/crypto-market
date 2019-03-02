@@ -52,7 +52,7 @@ export default class ApiClient {
     );
   }
 
-  async getTicker(assetPairs: AssetPair[]): Promise<Ticker[]> {
+  async getTickers(assetPairs: AssetPair[]): Promise<Ticker[]> {
     const response = await this.instance.get(Config.routes.getTicker, {
       params: { pair: this.outputMapper.mapAssetPairs(assetPairs) }
     });

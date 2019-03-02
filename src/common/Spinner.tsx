@@ -28,7 +28,7 @@ const Spinner = (props: IProps) => {
 };
 
 Spinner.defaultProps = {
-  size: Size.large
+  size: "large"
 };
 
 export default Spinner;

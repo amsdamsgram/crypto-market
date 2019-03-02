@@ -5,22 +5,22 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import Theme from "../Theme";
 
-import PriceList from "../prices/PriceList";
+import TickerPriceList from "../tickers/TickerPriceList";
 
 const AppNavigator = createStackNavigator(
   {
-    PriceList: {
+    TickerPriceList: {
       navigationOptions: {
         title: "Prices"
       },
-      screen: PriceList
+      screen: TickerPriceList
     }
   },
   {
     cardStyle: {
       backgroundColor: Theme.colors.page
     },
-    initialRouteName: "PriceList"
+    initialRouteName: "TickerPriceList"
   }
 );
 
