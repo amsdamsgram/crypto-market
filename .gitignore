@@ -46,3 +46,7 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# Jest
+#
+.jest/
