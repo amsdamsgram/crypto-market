@@ -1,8 +1,13 @@
 import React from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
+enum Size {
+  "small",
+  "large"
+}
+
 interface IProps {
-  size?: string;
+  size: Size;
 }
 
 const styles = StyleSheet.create({
@@ -23,7 +28,7 @@ const Spinner = (props: IProps) => {
 };
 
 Spinner.defaultProps = {
-  size: "large"
+  size: Size.large
 };
 
 export default Spinner;

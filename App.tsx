@@ -3,13 +3,12 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 
 import ApiClient from "./src/api/ApiClient";
 import Logger from "./src/logging/Logger";
-import PriceList from "./src/prices/PriceList";
+import RootNavigator from "./src/navigation/RootNavigator";
 
 interface IProps {}
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     flex: 1
   }
 });
@@ -28,7 +27,7 @@ export default class App extends Component<IProps> {
   render() {
     return (
       <View style={styles.container}>
-        <PriceList />
+        <RootNavigator />
       </View>
     );
   }
