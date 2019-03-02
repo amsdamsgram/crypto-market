@@ -12,6 +12,7 @@
     "clean:ios": "rm -rf ios/build/ && rm -rf ios/Pods/",
     "clean:metro": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/haste-* && rm -rf $TMPDIR/metro-*",
     "ios": "react-native run-ios",
+    "lint": "tslint --project tsconfig.json",
     "start": "react-native start",
     "test": "jest"
   },
@@ -30,6 +31,10 @@
     "metro-react-native-babel-preset": "0.53.0",
     "react-native-typescript-transformer": "^1.2.11",
     "react-test-renderer": "16.6.3",
+    "tslint": "^5.13.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.3.3333"
   },
   "jest": {

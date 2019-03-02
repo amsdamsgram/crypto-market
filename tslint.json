@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "interface-name": true,
+    "jsx-no-lambda": false,
+    "member-access": false,
+    "no-empty-interface": false,
+    "object-literal-sort-keys": true,
+    "quotemark": [true, "double", "jsx-double"],
+    "semicolon": [true, "always"]
+  }
+}
