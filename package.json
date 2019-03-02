@@ -3,7 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android-emulator": "$ANDROID_HOME/emulator/emulator @Android_API_27 -wipe-data",
+    "android": "react-native run-android",
+    "bundle-release-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output .build/android-release-bundle.js --sourcemap-output .build/android-release-sourcemap.json",
+    "bundle-release-ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output .build/ios-release-bundle.js --sourcemap-output .build/ios-release-sourcemap.json",
+    "clean": "rm -rf node_modules &&  yarn clean:ios && yarn clean:android && yarn clean:metro",
+    "clean:android": "rm -rf build/android",
+    "clean:ios": "rm -rf ios/build/ && rm -rf ios/Pods/",
+    "clean:metro": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/haste-* && rm -rf $TMPDIR/metro-*",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
