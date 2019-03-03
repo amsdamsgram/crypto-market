@@ -22,7 +22,6 @@ const StyledChart = styled(LineChart)`
 
 const Container = styled.View`
   flex-direction: row;
-  height: ${props => `${props.height}px`};
   padding: ${Theme.globalStyles.padding}px;
 `;
 
@@ -51,7 +50,7 @@ export default class Chart extends Component<IProps> {
     return (
       <View>
         {this.renderHeader()}
-        <Container height={this.props.height}>
+        <Container style={{ height: this.props.height }}>
           <YAxis
             data={this.props.data}
             contentInset={verticalContentInset}
