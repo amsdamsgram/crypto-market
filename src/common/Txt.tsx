@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import styled from "styled-components/native";
 
 import Theme from "../Theme";
 
@@ -8,18 +8,16 @@ interface IProps {
   style?: any;
 }
 
-const styles = StyleSheet.create({
-  text: {
-    color: Theme.colors.text,
-    fontSize: Theme.globalStyles.fontSize
-  }
-});
+const StyledText = styled.Text`
+  color: ${Theme.colors.text};
+  font-size: ${Theme.globalStyles.fontSize}px;
+`;
 
 const Txt = (props: IProps) => {
   return (
-    <Text {...props} style={[styles.text, props.style]}>
+    <StyledText {...props} style={props.style}>
       {props.children}
-    </Text>
+    </StyledText>
   );
 };
 

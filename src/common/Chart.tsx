@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Grid, LineChart, YAxis } from "react-native-svg-charts";
+import styled from "styled-components/native";
 
 import Txt from "../common/Txt";
 import Theme from "../Theme";
@@ -14,32 +15,33 @@ interface IProps {
 
 const AXE_FONT_SIZE = 10;
 
-const styles = StyleSheet.create({
-  chart: {
-    flex: 1,
-    marginLeft: 10
-  },
-  container: {
-    flexDirection: "row",
-    padding: Theme.globalStyles.padding
-  },
-  header: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: Theme.globalStyles.padding
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "500"
-  }
-});
+const StyledChart = styled(LineChart)`
+  flex: 1;
+  margin-left: 10px;
+`;
+
+const Container = styled.View`
+  flex-direction: row;
+  padding: ${Theme.globalStyles.padding}px;
+`;
+
+const Header = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding: ${Theme.globalStyles.padding}px;
+`;
+
+const Title = styled(Txt)`
+  font-size: 20px;
+  font-weight: 500;
+`;
 
 export default class Chart extends Component<IProps> {
   renderHeader() {
     return (
-      <View style={styles.header}>
-        <Txt style={styles.title}>{this.props.title}</Txt>
-      </View>
+      <Header>
+        <Title>{this.props.title}</Title>
+      </Header>
     );
   }
   render() {
@@ -48,7 +50,7 @@ export default class Chart extends Component<IProps> {
     return (
       <View>
         {this.renderHeader()}
-        <View style={[styles.container, { height: this.props.height }]}>
+        <Container style={{ height: this.props.height }}>
           <YAxis
             data={this.props.data}
             contentInset={verticalContentInset}
@@ -57,15 +59,14 @@ export default class Chart extends Component<IProps> {
               fontSize: AXE_FONT_SIZE
             }}
           />
-          <LineChart
-            style={styles.chart}
+          <StyledChart
             data={this.props.data}
             contentInset={verticalContentInset}
             svg={{ stroke: Theme.colors.primary }}
           >
             <Grid />
-          </LineChart>
-        </View>
+          </StyledChart>
+        </Container>
       </View>
     );
   }

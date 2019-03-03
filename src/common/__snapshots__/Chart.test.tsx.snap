@@ -4,11 +4,16 @@ exports[`Chart should match snapshot 1`] = `
 <View>
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-        "padding": 15,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
     }
   >
     <Text
@@ -33,7 +38,10 @@ exports[`Chart should match snapshot 1`] = `
       Array [
         Object {
           "flexDirection": "row",
-          "padding": 15,
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
         },
         Object {
           "height": 100,
@@ -70,10 +78,14 @@ exports[`Chart should match snapshot 1`] = `
     </View>
     <View
       style={
-        Object {
-          "flex": 1,
-          "marginLeft": 10,
-        }
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginLeft": 10,
+          },
+        ]
       }
     >
       <View
