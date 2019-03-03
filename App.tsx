@@ -1,8 +1,11 @@
 import * as mobx from "mobx";
 import { Provider } from "mobx-react/native";
 import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
 
 import ApiClient from "./src/api/ApiClient";
+import ErrorStore from "./src/error/ErrorStore";
+import GlobalErrorCard from "./src/error/GlobalErrorCard";
 import Logger from "./src/logging/Logger";
 import NavigationService from "./src/navigation/NavigationService";
 import RootNavigator from "./src/navigation/RootNavigator";
@@ -10,6 +13,12 @@ import TickerStore from "./src/tickers/TickerStore";
 import TradeStore from "./src/trades/TradeStore";
 
 interface IProps {}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+});
 
 export default class App extends Component<IProps> {
   apiClient: ApiClient;
@@ -32,10 +41,12 @@ export default class App extends Component<IProps> {
   }
 
   initStores() {
-    const tickerStore = new TickerStore(this.apiClient);
-    const tradeStore = new TradeStore(this.apiClient);
+    const errorStore = new ErrorStore();
+    const tickerStore = new TickerStore(this.apiClient, errorStore);
+    const tradeStore = new TradeStore(this.apiClient, errorStore);
 
     this.stores = {
+      errorStore,
       tickerStore,
       tradeStore
     };
@@ -44,14 +55,18 @@ export default class App extends Component<IProps> {
   render() {
     return (
       <Provider
+        errorStore={this.stores.errorStore}
         tickerStore={this.stores.tickerStore}
         tradeStore={this.stores.tradeStore}
       >
-        <RootNavigator
-          ref={navigatorRef => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
+        <View style={styles.container}>
+          <GlobalErrorCard />
+          <RootNavigator
+            ref={navigatorRef => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}
+          />
+        </View>
       </Provider>
     );
   }

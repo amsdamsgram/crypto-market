@@ -1,20 +1,23 @@
 import { action, computed, observable, runInAction } from "mobx";
 
 import ApiClient from "../api/ApiClient";
+import ErrorStore from "../error/ErrorStore";
 import Ticker from "../models/Ticker";
 import Trade from "../models/Trade";
 import TradeAction from "./TradeAction";
 
 export default class TradeStore {
   apiClient: ApiClient;
+  errorStore: ErrorStore;
 
   @observable loading: boolean = false;
   @observable refreshing: boolean = false;
   @observable currentTicker: Ticker;
   @observable recentTrades: Trade[] = [];
 
-  constructor(apiClient: ApiClient) {
+  constructor(apiClient: ApiClient, errorStore: ErrorStore) {
     this.apiClient = apiClient;
+    this.errorStore = errorStore;
   }
 
   @computed
@@ -40,6 +43,8 @@ export default class TradeStore {
         this.toggle(interaction, false);
       });
     } catch (err) {
+      this.errorStore.notifyGlobalError();
+
       runInAction(() => {
         this.toggle(interaction, false);
       });
