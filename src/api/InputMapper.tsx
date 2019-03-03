@@ -8,7 +8,7 @@ export default class InputMapper {
   }
 
   mapTicker(raw: any) {
-    return new Ticker(raw.name, raw.c[0]);
+    return new Ticker(raw.pairName, raw.c[0]);
   }
 
   mapTrade(raw: any) {

@@ -31,6 +31,13 @@ export default class RecentTrades extends Component<IProps> {
     tickerStore: null
   };
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      ...Theme.headerStyle,
+      title: navigation.getParam("pairName", "")
+    };
+  };
+
   componentDidMount() {
     this.props.tradeStore.getRecentTrades(TradeAction.FETCH);
   }

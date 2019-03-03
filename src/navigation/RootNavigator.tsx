@@ -7,10 +7,6 @@ import RecentTrades from "../trades/RecentTrades";
 const AppNavigator = createStackNavigator(
   {
     RecentTrades: {
-      navigationOptions: {
-        ...Theme.headerStyle,
-        title: "Recent Trades"
-      },
       screen: RecentTrades
     },
     TickerPriceList: {

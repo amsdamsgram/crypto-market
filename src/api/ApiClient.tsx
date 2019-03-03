@@ -73,7 +73,10 @@ export default class ApiClient {
     });
 
     return Object.keys(response.data.result).map((key: string) =>
-      this.inputMapper.mapTicker({ ...response.data.result[key], name: key })
+      this.inputMapper.mapTicker({
+        ...response.data.result[key],
+        pairName: key
+      })
     );
   }
 }

@@ -38,7 +38,9 @@ export default class TickerPriceListItem extends Component<IProps> {
 
   onPress = () => {
     this.props.tradeStore.setCurrentTicker(this.props.ticker);
-    NavigationService.navigate("RecentTrades");
+    NavigationService.navigate("RecentTrades", {
+      pairName: this.props.ticker.pairName
+    });
   };
 
   render() {
