@@ -1,11 +1,13 @@
 import { inject, observer } from "mobx-react/native";
 import React, { Component, Fragment } from "react";
-import { RefreshControl, ScrollView, StyleSheet } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 
 import Chart from "../common/Chart";
 import ComponentSize from "../common/ComponentSize";
 import Spinner from "../common/Spinner";
+import Txt from "../common/Txt";
+import Config from "../config/Config";
 import Ticker from "../models/Ticker";
 import Theme from "../Theme";
 import TradeAction from "./TradeAction";
@@ -22,6 +24,15 @@ const CHART_HEIGHT = 400;
 const styles = StyleSheet.create({
   container: {
     padding: Theme.globalStyles.padding
+  },
+  header: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    padding: Theme.globalStyles.padding
+  },
+  headerText: {
+    fontWeight: "bold"
   }
 });
 
@@ -41,10 +52,20 @@ export default class RecentTrades extends Component<IProps> {
       ...Theme.headerStyle,
       title: navigation.getParam("pairName", "")
     };
-  }
+  };
 
   componentDidMount() {
     this.props.tradeStore.getRecentTrades(TradeAction.FETCH);
+  }
+
+  renderHeader() {
+    return (
+      <View style={styles.header}>
+        <Txt style={styles.headerText}>{` Last ${
+          Config.recentTradesLimit
+        } trades`}</Txt>
+      </View>
+    );
   }
 
   renderRefreshControl() {
@@ -95,6 +116,7 @@ export default class RecentTrades extends Component<IProps> {
         contentContainerStyle={styles.container}
         refreshControl={this.renderRefreshControl()}
       >
+        {this.renderHeader()}
         {this.renderContent()}
       </ScrollView>
     );
