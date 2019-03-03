@@ -1,9 +1,10 @@
 import * as mobx from "mobx";
-import { observer, Provider } from "mobx-react/native";
+import { Provider } from "mobx-react/native";
 import React, { Component } from "react";
 
 import ApiClient from "./src/api/ApiClient";
 import Logger from "./src/logging/Logger";
+import NavigationService from "./src/navigation/NavigationService";
 import RootNavigator from "./src/navigation/RootNavigator";
 import TickerStore from "./src/tickers/TickerStore";
 
@@ -40,7 +41,11 @@ export default class App extends Component<IProps> {
   render() {
     return (
       <Provider tickerStore={this.stores.tickerStore}>
-        <RootNavigator />
+        <RootNavigator
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
       </Provider>
     );
   }

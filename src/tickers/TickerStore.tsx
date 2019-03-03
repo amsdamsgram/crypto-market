@@ -2,6 +2,7 @@ import { action, observable, runInAction } from "mobx";
 
 import ApiClient from "../api/ApiClient";
 import Ticker from "../models/Ticker";
+import Trade from "../models/Trade";
 import TickerAction from "./TickerAction";
 
 export default class TickerStore {
@@ -10,6 +11,8 @@ export default class TickerStore {
   @observable loading: boolean = false;
   @observable refreshing: boolean = false;
   @observable tickers: Ticker[] = [];
+  @observable currentTicker: Ticker;
+  @observable recentTrades: Trade[] = [];
 
   constructor(apiClient: ApiClient) {
     this.apiClient = apiClient;
@@ -31,6 +34,30 @@ export default class TickerStore {
         this.toggle(interaction, false);
       });
     }
+  }
+
+  @action
+  async getTickerRecentTrades() {
+    try {
+      this.toggle(TickerAction.FETCH, true);
+      const trades = await this.apiClient.getTickerRecentTrades(
+        this.currentTicker
+      );
+
+      runInAction(() => {
+        this.recentTrades = trades;
+        this.toggle(TickerAction.FETCH, false);
+      });
+    } catch (err) {
+      runInAction(() => {
+        this.toggle(TickerAction.FETCH, false);
+      });
+    }
+  }
+
+  @action
+  setCurrentTicker(ticker: Ticker) {
+    this.currentTicker = ticker;
   }
 
   @action

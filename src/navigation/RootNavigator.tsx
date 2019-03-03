@@ -3,6 +3,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 import Theme from "../Theme";
 
 import TickerPriceList from "../tickers/TickerPriceList";
+import TickerRecentTrades from "../tickers/TickerRecentTrades";
 
 const AppNavigator = createStackNavigator(
   {
@@ -11,6 +12,12 @@ const AppNavigator = createStackNavigator(
         title: "Prices"
       },
       screen: TickerPriceList
+    },
+    TickerRecentTrades: {
+      navigationOptions: {
+        title: "Recent Trades"
+      },
+      screen: TickerRecentTrades
     }
   },
   {
