@@ -1,5 +1,8 @@
 import React from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator } from "react-native";
+import styled from "styled-components/native";
+
+import Theme from "../Theme";
 
 enum Size {
   "small",
@@ -10,19 +13,17 @@ interface IProps {
   size: Size;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 10
-  }
-});
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  padding: ${Theme.globalStyles.padding}px;
+`;
 
 const Spinner = (props: IProps) => {
   return (
-    <View style={styles.container}>
+    <Container>
       <ActivityIndicator size={props.size} />
-    </View>
+    </Container>
   );
 };
 
