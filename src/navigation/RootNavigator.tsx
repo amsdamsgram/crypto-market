@@ -1,23 +1,24 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import Theme from "../Theme";
-
 import TickerPriceList from "../tickers/TickerPriceList";
-import TickerRecentTrades from "../tickers/TickerRecentTrades";
+import RecentTrades from "../trades/RecentTrades";
 
 const AppNavigator = createStackNavigator(
   {
+    RecentTrades: {
+      navigationOptions: {
+        ...Theme.headerStyle,
+        title: "Recent Trades"
+      },
+      screen: RecentTrades
+    },
     TickerPriceList: {
       navigationOptions: {
+        ...Theme.headerStyle,
         title: "Prices"
       },
       screen: TickerPriceList
-    },
-    TickerRecentTrades: {
-      navigationOptions: {
-        title: "Recent Trades"
-      },
-      screen: TickerRecentTrades
     }
   },
   {

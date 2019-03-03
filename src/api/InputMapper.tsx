@@ -12,6 +12,10 @@ export default class InputMapper {
   }
 
   mapTrade(raw: any) {
-    return new Trade(raw[0], raw[1], new Date(raw[2] * 1000));
+    return new Trade(
+      parseFloat(raw[0]),
+      parseFloat(raw[1]),
+      new Date(raw[2] * 1000)
+    );
   }
 }

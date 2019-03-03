@@ -1,7 +1,7 @@
 export default {
   apiBaseURL: "https://api.kraken.com",
 
-  recentTradesLimit: 100,
+  recentTradesLimit: 80,
 
   routes: {
     // GET

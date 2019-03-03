@@ -1,12 +1,22 @@
+const colors = {
+  page: "#fcfcfc",
+  primary: "#5841D8",
+  separator: "#dedede",
+  text: "#414141",
+  textSecondary: "#b8b8c5",
+  white: "#fff"
+};
+
 export default {
-  colors: {
-    page: "#fcfcfc",
-    separator: "#dedede",
-    text: "#414141",
-    white: "#fff"
-  },
+  colors,
   globalStyles: {
     fontSize: 14,
     padding: 15
+  },
+  headerStyle: {
+    headerTintColor: colors.primary,
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
   }
 };

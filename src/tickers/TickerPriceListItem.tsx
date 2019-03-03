@@ -7,12 +7,12 @@ import Txt from "../common/Txt";
 import Ticker from "../models/Ticker";
 import NavigationService from "../navigation/NavigationService";
 import Theme from "../Theme";
-import TickerStore from "./TickerStore";
+import TradeStore from "../trades/TradeStore";
 
 interface IProps {
   size: ComponentSize;
   ticker: Ticker;
-  tickerStore: any | TickerStore;
+  tradeStore: any | TradeStore;
 }
 
 const styles = StyleSheet.create({
@@ -29,16 +29,16 @@ const styles = StyleSheet.create({
   }
 });
 
-@inject("tickerStore")
+@inject("tradeStore")
 @observer
 export default class TickerPriceListItem extends Component<IProps> {
   static defaultProps = {
-    tickerStore: null
+    tradeStore: null
   };
 
   onPress = () => {
-    this.props.tickerStore.setCurrentTicker(this.props.ticker);
-    NavigationService.navigate("TickerRecentTrades");
+    this.props.tradeStore.setCurrentTicker(this.props.ticker);
+    NavigationService.navigate("RecentTrades");
   };
 
   render() {

@@ -58,11 +58,13 @@ export default class ApiClient {
       params: { pair: ticker.pairName }
     });
 
-    return Object.keys(response.data.result).map((key: string) =>
-      this.inputMapper.mapTrade(
-        response.data.result[key].slice(0, Config.recentTradesLimit)
-      )
-    );
+    if (response.data.result[ticker.pairName]) {
+      return response.data.result[ticker.pairName]
+        .slice(0, Config.recentTradesLimit)
+        .map((raw: any) => this.inputMapper.mapTrade(raw));
+    }
+
+    return [];
   }
 
   async getTickers(assetPairs: AssetPair[]): Promise<Ticker[]> {

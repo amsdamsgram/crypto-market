@@ -7,6 +7,7 @@ import Logger from "./src/logging/Logger";
 import NavigationService from "./src/navigation/NavigationService";
 import RootNavigator from "./src/navigation/RootNavigator";
 import TickerStore from "./src/tickers/TickerStore";
+import TradeStore from "./src/trades/TradeStore";
 
 interface IProps {}
 
@@ -32,15 +33,20 @@ export default class App extends Component<IProps> {
 
   initStores() {
     const tickerStore = new TickerStore(this.apiClient);
+    const tradeStore = new TradeStore(this.apiClient);
 
     this.stores = {
-      tickerStore
+      tickerStore,
+      tradeStore
     };
   }
 
   render() {
     return (
-      <Provider tickerStore={this.stores.tickerStore}>
+      <Provider
+        tickerStore={this.stores.tickerStore}
+        tradeStore={this.stores.tradeStore}
+      >
         <RootNavigator
           ref={navigatorRef => {
             NavigationService.setTopLevelNavigator(navigatorRef);
