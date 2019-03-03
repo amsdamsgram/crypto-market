@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chart should match snapshot 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#414141",
+            "fontSize": 14,
+          },
+          Object {
+            "fontSize": 20,
+            "fontWeight": "500",
+          },
+        ]
+      }
+    >
+      Title
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "padding": 15,
+        },
+        Object {
+          "height": 100,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "transparent",
+              "fontSize": 10,
+            }
+          }
+        >
+          4.5
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "marginLeft": 10,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

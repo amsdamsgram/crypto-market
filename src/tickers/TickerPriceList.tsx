@@ -36,7 +36,7 @@ export default class TickerPriceList extends Component<IProps> {
 
   onRefresh = () => {
     this.props.tickerStore.getTickers(TickerAction.REFRESH);
-  };
+  }
 
   renderItem(props: { item: Ticker }) {
     const size = ComponentSize.computeFromWindow(

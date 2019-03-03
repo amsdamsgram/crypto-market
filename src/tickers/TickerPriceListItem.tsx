@@ -41,7 +41,7 @@ export default class TickerPriceListItem extends Component<IProps> {
     NavigationService.navigate("RecentTrades", {
       pairName: this.props.ticker.pairName
     });
-  };
+  }
 
   render() {
     return (
