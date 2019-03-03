@@ -19,9 +19,6 @@ const MARGIN_BETWEEN_ITEMS = 5;
 const CONTAINER_PADDING = Theme.globalStyles.padding;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   item: {
     margin: MARGIN_BETWEEN_ITEMS
   },

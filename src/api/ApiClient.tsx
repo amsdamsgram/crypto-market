@@ -4,6 +4,7 @@ import Config from "../config/Config";
 import Logger from "../logging/Logger";
 import AssetPair from "../models/AssetPair";
 import Ticker from "../models/Ticker";
+import Trade from "../models/Trade";
 import ApiClientUtils from "./ApiClientUtils";
 import InputMapper from "./InputMapper";
 import OutputMapper from "./OutputMapper";
@@ -50,6 +51,20 @@ export default class ApiClient {
     return Object.keys(response.data.result).map((key: string) =>
       this.inputMapper.mapAssetPair(response.data.result[key])
     );
+  }
+
+  async getTickerRecentTrades(ticker: Ticker): Promise<Trade[]> {
+    const response = await this.instance.get(Config.routes.getRecentTrades, {
+      params: { pair: ticker.pairName }
+    });
+
+    if (response.data.result[ticker.pairName]) {
+      return response.data.result[ticker.pairName]
+        .slice(0, Config.recentTradesLimit)
+        .map((raw: any) => this.inputMapper.mapTrade(raw));
+    }
+
+    return [];
   }
 
   async getTickers(assetPairs: AssetPair[]): Promise<Ticker[]> {
