@@ -60,12 +60,12 @@ export default class App extends Component<IProps> {
         tradeStore={this.stores.tradeStore}
       >
         <View style={styles.container}>
-          <GlobalErrorCard />
           <RootNavigator
             ref={navigatorRef => {
               NavigationService.setTopLevelNavigator(navigatorRef);
             }}
           />
+          <GlobalErrorCard />
         </View>
       </Provider>
     );

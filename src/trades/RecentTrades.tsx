@@ -1,6 +1,7 @@
 import { inject, observer } from "mobx-react/native";
 import React, { Component, Fragment } from "react";
 import { RefreshControl, ScrollView, StyleSheet } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 
 import Chart from "../common/Chart";
 import ComponentSize from "../common/ComponentSize";
@@ -31,7 +32,11 @@ export default class RecentTrades extends Component<IProps> {
     tickerStore: null
   };
 
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({
+    navigation
+  }: {
+    navigation: NavigationScreenProp<any>;
+  }) => {
     return {
       ...Theme.headerStyle,
       title: navigation.getParam("pairName", "")
