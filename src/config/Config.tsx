@@ -1,6 +1,8 @@
 export default {
   apiBaseURL: "https://api.kraken.com",
 
+  errorAutoDismissDuration: 3000,
+
   recentTradesLimit: 80,
 
   routes: {

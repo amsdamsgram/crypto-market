@@ -1,18 +1,21 @@
 import { action, observable, runInAction } from "mobx";
 
 import ApiClient from "../api/ApiClient";
+import ErrorStore from "../error/ErrorStore";
 import Ticker from "../models/Ticker";
 import TickerAction from "./TickerAction";
 
 export default class TickerStore {
   apiClient: ApiClient;
+  errorStore: ErrorStore;
 
   @observable loading: boolean = false;
   @observable refreshing: boolean = false;
   @observable tickers: Ticker[] = [];
 
-  constructor(apiClient: ApiClient) {
+  constructor(apiClient: ApiClient, errorStore: ErrorStore) {
     this.apiClient = apiClient;
+    this.errorStore = errorStore;
   }
 
   @action
@@ -27,6 +30,8 @@ export default class TickerStore {
         this.toggle(interaction, false);
       });
     } catch (err) {
+      this.errorStore.notifyGlobalError();
+
       runInAction(() => {
         this.toggle(interaction, false);
       });
