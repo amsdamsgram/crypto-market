@@ -4,7 +4,6 @@ import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 
 import Chart from "../common/Chart";
-import ComponentSize from "../common/ComponentSize";
 import Spinner from "../common/Spinner";
 import Txt from "../common/Txt";
 import Config from "../config/Config";
@@ -14,7 +13,6 @@ import TradeAction from "./TradeAction";
 import TradeStore from "./TradeStore";
 
 interface IProps {
-  size: ComponentSize;
   ticker: Ticker;
   tradeStore: any | TradeStore;
 }
