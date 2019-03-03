@@ -14,7 +14,10 @@ export default {
     padding: 15
   },
   headerStyle: {
-    headerTintColor: colors.primary,
+    headerStyle: {
+      backgroundColor: colors.primary
+    },
+    headerTintColor: colors.white,
     headerTitleStyle: {
       fontWeight: "bold"
     }

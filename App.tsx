@@ -1,7 +1,7 @@
 import * as mobx from "mobx";
 import { Provider } from "mobx-react/native";
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 
 import ApiClient from "./src/api/ApiClient";
 import ErrorStore from "./src/error/ErrorStore";
@@ -9,6 +9,7 @@ import GlobalErrorCard from "./src/error/GlobalErrorCard";
 import Logger from "./src/logging/Logger";
 import NavigationService from "./src/navigation/NavigationService";
 import RootNavigator from "./src/navigation/RootNavigator";
+import Theme from "./src/Theme";
 import TickerStore from "./src/tickers/TickerStore";
 import TradeStore from "./src/trades/TradeStore";
 
@@ -60,6 +61,10 @@ export default class App extends Component<IProps> {
         tradeStore={this.stores.tradeStore}
       >
         <View style={styles.container}>
+          <StatusBar
+            backgroundColor={Theme.colors.primary}
+            barStyle="light-content"
+          />
           <RootNavigator
             ref={navigatorRef => {
               NavigationService.setTopLevelNavigator(navigatorRef);
