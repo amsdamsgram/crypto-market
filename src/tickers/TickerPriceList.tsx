@@ -2,8 +2,8 @@ import { inject, observer } from "mobx-react/native";
 import React, { Component } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
-import ComponentSize from "../common/ComponentSize";
 import Spinner from "../common/Spinner";
+import Txt from "../common/Txt";
 import Ticker from "../models/Ticker";
 import Theme from "../Theme";
 import TickerAction from "./TickerAction";
@@ -14,16 +14,22 @@ interface IProps {
   tickerStore: TickerStore;
 }
 
-const NB_COLUMNS = 2;
-const MARGIN_BETWEEN_ITEMS = 5;
-const CONTAINER_PADDING = Theme.globalStyles.padding;
-
 const styles = StyleSheet.create({
+  header: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: Theme.globalStyles.padding + 15,
+    paddingVertical: Theme.globalStyles.padding
+  },
+  headerText: {
+    fontWeight: "bold"
+  },
   item: {
-    margin: MARGIN_BETWEEN_ITEMS
+    margin: 5
   },
   list: {
-    padding: CONTAINER_PADDING
+    padding: Theme.globalStyles.padding
   }
 });
 
@@ -36,17 +42,19 @@ export default class TickerPriceList extends Component<IProps> {
 
   onRefresh = () => {
     this.props.tickerStore.getTickers(TickerAction.REFRESH);
-  }
+  };
+
+  renderHeader = () => (
+    <View style={styles.header}>
+      <Txt style={styles.headerText}>Pair</Txt>
+      <Txt style={styles.headerText}>Price</Txt>
+    </View>
+  );
 
   renderItem(props: { item: Ticker }) {
-    const size = ComponentSize.computeFromWindow(
-      NB_COLUMNS,
-      MARGIN_BETWEEN_ITEMS * 2 * NB_COLUMNS + CONTAINER_PADDING * 2
-    );
-
     return (
       <View style={styles.item}>
-        <TickerPriceListItem size={size} ticker={props.item} />
+        <TickerPriceListItem ticker={props.item} />
       </View>
     );
   }
@@ -61,7 +69,7 @@ export default class TickerPriceList extends Component<IProps> {
         contentContainerStyle={styles.list}
         data={this.props.tickerStore.tickers.slice()}
         keyExtractor={item => item.pairName}
-        numColumns={NB_COLUMNS}
+        ListHeaderComponent={this.renderHeader}
         onRefresh={this.onRefresh}
         refreshing={false}
         renderItem={this.renderItem}
